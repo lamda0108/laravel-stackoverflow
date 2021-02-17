@@ -23,7 +23,7 @@ class Question extends Model
     }
 
     public function getUrlAttribute(){
-        return route("questions.show", $this->id);
+        // return route("questions.show", $this->id);
         //$question->url
     }
 
@@ -31,5 +31,15 @@ class Question extends Model
         return $this->created_at->diffForHumans();
         // return $this->created_at->format("d/m/Y");23/05/2018
         //$question->url
+    }
+
+    public function getStatusAttribute(){
+        if($this->answers>0){
+            if($this->best_answer_id){
+                return "answered-accepted";
+            }
+            return "answered";
+        }
+        return "unanswered";
     }
 }
