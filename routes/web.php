@@ -23,4 +23,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('question', App\Http\Controllers\QuestionController::class)->except('show');
+// call Route::bind in RouteServiceProvider
 Route::get('/question/{slug}',[App\Http\Controllers\QuestionController::class, 'show'] )->name('question.show');

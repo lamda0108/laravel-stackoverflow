@@ -25,6 +25,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // The current login user can only edit or delete his own question
+        \Gate::define('update-question', function($user, $question){
+            // $user:current user who signed in now
+            // $question:Question model
+            return $user->id == $question->user_id;
+        });
+
+        \Gate::define('delete-question', function($user, $question){
+            // $user:current user who signed in now
+            // $question:Question model
+            return $user->id == $question->user_id;
+        });
     }
 }
