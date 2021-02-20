@@ -8,7 +8,7 @@
                     <hr>
 
                     @include('layouts._messages')
-                    
+
                     @foreach($answers as $answer)
                         <div class="media">
                             <!-- vote controls -->
@@ -20,10 +20,24 @@
                                     <a title="This answer is not useful" class="vote-down off" href="">
                                     <i class="fas fa-caret-down fa-3x"></i>
                                     </a>
-                                    <a title="Mark this answer as best answer" class="vote-accepted mt-2" href="">
-                                        <i class="fas fa-check fa-2x"></i>
-                                        <span class="favorite-count">123</span>
-                                    </a>
+                                    @can('accept', $answer)
+                                        <a title="Mark this answer as best answer" class="{{$answer->status}} mt-2" 
+                                        onclick="event.preventDefault(); document.getElementById('accept-answer-{{$answer->id}}').submit();">
+                                            <i class="fas fa-check fa-2x"></i>                   
+                                        </a>
+                                        <form action="{{route('answer.accept', $answer->id)}}" 
+                                            id="accept-answer-{{$answer->id}}" method="POST"
+                                            style="display:none;">
+                                        @csrf
+                                        </form>  
+                                    @else
+                                        <!-- if this answer is marked as the best answer, every user can see a green tick -->
+                                        @if($answer->is_best)
+                                            <a title="The question owner acceptd this answer as the vest answer" class="{{$answer->status}} mt-2" >
+                                                <i class="fas fa-check fa-2x"></i>                   
+                                            </a>
+                                        @endif
+                                    @endcan  
                              </div>
                             <!-- end of vote controls -->
                             <div class="media-body">

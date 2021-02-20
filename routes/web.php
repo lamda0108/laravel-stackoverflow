@@ -27,3 +27,4 @@ Route::get('/question/{slug}',[App\Http\Controllers\QuestionController::class, '
 
 Route::resource('question.answer', App\Http\Controllers\AnswerController::class)->only(['store', 'edit', 'update', 'destroy']);
 // Route::post('/question/{question}/answer', [App\Http\Controllers\AnswerController::class, 'store'])->name('answer.store');
+Route::post('/answer/{answer}/accept',App\Http\Controllers\AcceptAnswerController::class )->name('answer.accept');
