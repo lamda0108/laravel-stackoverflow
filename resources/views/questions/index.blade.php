@@ -40,12 +40,12 @@
                                     </h3>
                                     <div class="ml-auto">
                                         @if(Auth::check() && Auth::user()->can('update', $question))
-                                        <!-- @can('update', $question) -->
+                                 
                                             <a href="{{route('question.edit', $question->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
                                         @endif
-                                        <!-- @endcan -->
+                
 
-                                        <!-- @can('delete', $question) -->
+
                                         @if(Auth::check() && Auth::user()->can('delete', $question))
                                             <form class="form-delete" action="{{route('question.destroy', $question->id)}}" method="post">
                                                 @method('DELETE')
@@ -54,7 +54,7 @@
                                                 onclick="return confirm('Are you sure?')">Delete</button>
                                             </form>
                                         @endif
-                                        <!-- @endcan -->
+                                
                                     </div>
                                 </div>   
                                
